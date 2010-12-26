@@ -17,6 +17,7 @@
  */
 
 #include <QApplication>
+#include <QLabel>
 #include "gstHandler.h"
 
 
@@ -25,6 +26,9 @@ int main(int argc , char ** argv)
 QApplication app(argc,argv);
 gstHandler pipeline(argc,argv);
 pipeline.constructPipeline();
+QLabel label;
+label.show();
+
 return 0;
 }
 
