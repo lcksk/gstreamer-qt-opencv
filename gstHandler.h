@@ -22,7 +22,7 @@
 #include <gst/app/gstappsink.h>
 #include <QObject>
 #include <QDebug>
-
+#include <QImage>
 class gstHandler  : public QObject
 {
 Q_OBJECT
@@ -37,7 +37,10 @@ public:
   
 gstHandler(int,char**);
 ~gstHandler();
+
 int constructPipeline();
+GstBuffer *gstbufferExtractBufferFromSink();
+QImage *qimageExtractBufferFromSink();//overloaded function  
 };
 
 #endif

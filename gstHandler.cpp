@@ -86,6 +86,12 @@ GstMessage *msg;
 qDebug ("Failed to start up pipeline!\n");
 }
 
+g_main_loop_run (loop);
+return ret;
+}
+
+GstBuffer* gstHandler::gstbufferExtractBufferFromSink()
+{
 /* 
   while (!gst_app_sink_is_eos (GST_APP_SINK (sink))) {
     GstBuffer *buf;
@@ -98,5 +104,17 @@ qDebug ("Failed to start up pipeline!\n");
 */
 }
 
+  
+QImage* gstHandler::qimageExtractBufferFromSink()
+{
+/* 
+  while (!gst_app_sink_is_eos (GST_APP_SINK (sink))) {
+    GstBuffer *buf;
 
-
+    buf = gst_app_sink_pull_buffer (GST_APP_SINK (sink));
+    qDebug ("retrieved buffer %p\n", buf);
+    gst_buffer_unref (buf);
+  }
+  gst_element_set_state (pipeline, GST_STATE_NULL);
+*/
+}
