@@ -27,8 +27,9 @@ QApplication app(argc,argv);
 gstHandler pipeline(argc,argv);
 pipeline.constructPipeline();
 QLabel label;
+label.setText("asdad");
 label.show();
 
-return 0;
+return app.exec();
 }
 

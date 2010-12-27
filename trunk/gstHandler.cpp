@@ -20,38 +20,13 @@
 #include "gstHandler.h"
 #include <QDebug>
 
-/*  
-static gboolean bus_call (GstBus     *bus,   GstMessage *msg,   gpointer    data)
-{
-GMainLoop *loop = data;
 
-switch (GST_MESSAGE_TYPE (msg)) 
+gboolean process_qt_event (gpointer *data)
 {
-case GST_MESSAGE_EOS:
-    g_print ("End-of-stream\n");
-    g_main_loop_quit (loop);
-break;
-case GST_MESSAGE_ERROR: 
-{
-    gchar *debug = NULL;
-    GError *err = NULL;
-    gst_message_parse_error (msg, &err, &debug);
-    qDebug("Error: %s\n", err->message);
-    g_error_free (err);
-    if (debug) {
-                      g_print ("Debug deails: %s\n", debug);
-                      g_free (debug);
-                   }
-                   g_main_loop_quit (loop);
-                   break;
-                 }
-                 default:
-                   break;
-              }
-              return TRUE;
-  }
-*/
-
+QCoreApplication::processEvents();
+//qDebug("i am free ",);
+return true;
+}
 
 gstHandler::gstHandler(int argc,char ** argv)
 {
@@ -63,8 +38,13 @@ loop = g_main_loop_new (NULL, FALSE);
 gstHandler::~gstHandler()
 {
 gst_object_unref (pipeline);
-//free(loop);
 }
+
+//void gstHandler::startGlibMainLoop()
+//{
+//g_idle_add((GSourceFunc) process_qt_event,NULL);
+//g_main_loop_run (loop);
+//}
 
 int gstHandler::constructPipeline()
 {
@@ -85,8 +65,6 @@ if (ret == GST_STATE_CHANGE_FAILURE)
 GstMessage *msg;
 qDebug ("Failed to start up pipeline!\n");
 }
-
-g_main_loop_run (loop);
 return ret;
 }
 
@@ -107,8 +85,8 @@ GstBuffer* gstHandler::gstbufferExtractBufferFromSink()
   
 QImage* gstHandler::qimageExtractBufferFromSink()
 {
-/* 
-  while (!gst_app_sink_is_eos (GST_APP_SINK (sink))) {
+ while(!gst_app_sink_is_eos (GST_APP_SINK(sink)));
+/*   while (!gst_app_sink_is_eos (GST_APP_SINK (sink))) {
     GstBuffer *buf;
 
     buf = gst_app_sink_pull_buffer (GST_APP_SINK (sink));

@@ -23,6 +23,8 @@
 #include <QObject>
 #include <QDebug>
 #include <QImage>
+#include <QCoreApplication>
+
 class gstHandler  : public QObject
 {
 Q_OBJECT
@@ -33,6 +35,8 @@ GstElement *pipeline;
 GstElement *src;
 GstElement *sink;
 
+public slots:
+
 public:
   
 gstHandler(int,char**);
@@ -41,6 +45,7 @@ gstHandler(int,char**);
 int constructPipeline();
 GstBuffer *gstbufferExtractBufferFromSink();
 QImage *qimageExtractBufferFromSink();//overloaded function  
+//gboolean process_qt_event (gpointer *data);
 };
 
 #endif
