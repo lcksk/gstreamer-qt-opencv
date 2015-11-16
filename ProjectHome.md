@@ -1,0 +1,1 @@
+well, i am trying to take input from gstreamer [webcam , could be any video stream ](preferably.md)use qt for GUI and use open cv to identify faces in the video stream
